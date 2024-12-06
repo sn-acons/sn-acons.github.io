@@ -19,7 +19,7 @@ const nameObjects = [];
 
 let textAlpha = 1.0; // Initial alpha for fading out
 let textFadeOut = true; // Control fading direction
-let textSize = 60; // Initial text size
+let textSize = 60; // Initial text size, responsive
 let showTimer = false;
 
 // Initialize name objects with random positions and velocities
@@ -70,8 +70,7 @@ function createParticles(x, y, color) {
 
 function animate() {
     requestAnimationFrame(animate);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Slightly transparent fill for trailing effect
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas for each frame
 
     fireworks.forEach((firework, index) => {
         if (!firework.exploded) {
@@ -169,7 +168,7 @@ function drawText() {
         if (textAlpha <= 0) {
             textAlpha = 0;
             textFadeOut = false;
-            textSize = 120; // Increase size for 2025
+            textSize = 100; // Increase size for 2025
         }
     } else {
         textAlpha += 0.005; // Slow down the fading in of 2025
@@ -207,4 +206,12 @@ function drawTimer() {
     ctx.shadowColor = '#FFFFFF';
     ctx.shadowBlur = 20;
     ctx.fillStyle = gradient; // Use gradient for the text fill
-    ctx.textAlign =[_{{{CITATION{{{_1{](https://github.com/EleanorEllingson/web-dev/tree/b2f2a382e77a20fd6895677c8b8f402ac4bae352/7-bank-project%2F1-template-route%2Ftranslations%2FREADME.ko.md)
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(timerText, canvas.width / 2, canvas.height / 2 + 70); // Position timer text below the year
+    ctx.restore();
+}
+
+window.addEventListener('resize', resizeCanvas);
+
+animate();
