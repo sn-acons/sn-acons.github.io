@@ -17,9 +17,9 @@
          display: block;
          }
          #modalinside {
-         background: rgb(2,0,36);
-         background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-         font: 
+         background: #CAC531;  /* fallback for old browsers */
+         background: -webkit-linear-gradient(to right, #F3F9A7, #CAC531);  /* Chrome 10-25, Safari 5.1-6 */
+         background: linear-gradient(to right, #F3F9A7, #CAC531); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
          }
          .banner {
          position: relative;
@@ -99,10 +99,23 @@
                   </div>
                </div>
                <center>
-                  <p id="demo" class="h1" style="color:white"> </p>
+                  <p id="demo" class="h1" style="color:black"> </p>
                </center>
+               <div class="col text-center">
+                  <button class="btn btn-default">View Invite</button>
+               </div>
             </div>
          </div>
+      </div>
+      <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+       <div class="modal-content">              
+         <div class="modal-body">
+           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+           <img src="" class="imagepreview" style="width: 100%;" >
+         </div>
+       </div>
+      </div>
       </div>
       <script>
          // Set the date we're counting down to
