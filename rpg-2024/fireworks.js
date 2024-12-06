@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d');
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    textSize = Math.min(canvas.width, canvas.height) / 10;
+    timerSize = Math.min(canvas.width, canvas.height) / 15;
 }
 
 resizeCanvas();
@@ -19,7 +21,8 @@ const nameObjects = [];
 
 let textAlpha = 1.0; // Initial alpha for fading out
 let textFadeOut = true; // Control fading direction
-let textSize = 60; // Initial text size, responsive
+let textSize = Math.min(canvas.width, canvas.height) / 10; // Initial text size, responsive
+let timerSize = Math.min(canvas.width, canvas.height) / 15; // Initial timer size, responsive
 let showTimer = false;
 
 // Initialize name objects with random positions and velocities
@@ -168,7 +171,7 @@ function drawText() {
         if (textAlpha <= 0) {
             textAlpha = 0;
             textFadeOut = false;
-            textSize = 100; // Increase size for 2025
+            textSize = Math.min(canvas.width, canvas.height) / 8; // Increase size for 2025
         }
     } else {
         textAlpha += 0.005; // Slow down the fading in of 2025
@@ -202,13 +205,13 @@ function drawTimer() {
 
     ctx.save();
     ctx.globalAlpha = 1; // Ensure the timer text is fully opaque
-    ctx.font = '60px Arial Black'; // Bold, modern font
+    ctx.font = `${timerSize}px Arial Black`; // Bold, modern font
     ctx.shadowColor = '#FFFFFF';
     ctx.shadowBlur = 20;
     ctx.fillStyle = gradient; // Use gradient for the text fill
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(timerText, canvas.width / 2, canvas.height / 2 + 70); // Position timer text below the year
+    ctx.fillText(timerText, canvas.width / 2, canvas.height / 2 + timerSize); // Position timer text below the year
     ctx.restore();
 }
 
