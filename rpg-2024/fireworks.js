@@ -1,7 +1,13 @@
 const canvas = document.getElementById('fireworksCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 const fireworks = [];
 const particles = [];
@@ -13,7 +19,7 @@ const nameObjects = [];
 
 let textAlpha = 1.0; // Initial alpha for fading out
 let textFadeOut = true; // Control fading direction
-let textSize = 100; // Increased initial text size
+let textSize = 60; // Initial text size
 let showTimer = false;
 
 // Initialize name objects with random positions and velocities
@@ -201,15 +207,4 @@ function drawTimer() {
     ctx.shadowColor = '#FFFFFF';
     ctx.shadowBlur = 20;
     ctx.fillStyle = gradient; // Use gradient for the text fill
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(timerText, canvas.width / 2, canvas.height / 2 + 70); // Position timer text below the year
-    ctx.restore();
-}
-
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-
-animate();
+    ctx.textAlign =[_{{{CITATION{{{_1{](https://github.com/EleanorEllingson/web-dev/tree/b2f2a382e77a20fd6895677c8b8f402ac4bae352/7-bank-project%2F1-template-route%2Ftranslations%2FREADME.ko.md)
