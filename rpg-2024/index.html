@@ -102,20 +102,20 @@
                   <p id="demo" class="h1" style="color:black"> </p>
                </center>
                <div class="col text-center">
-                  <button class="btn btn-default">View Invite</button>
+                  <button class="btn btn-default pop">View Invite</button>
                </div>
             </div>
          </div>
       </div>
       <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-       <div class="modal-content">              
-         <div class="modal-body">
-           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-           <img src="" class="imagepreview" style="width: 100%;" >
+         <div class="modal-dialog">
+            <div class="modal-content">              
+               <div class="modal-body">
+                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <img src="https://raw.githubusercontent.com/sn-acons/sn-acons.github.io/refs/heads/main/rpg-2024/invite.jpg" class="imagepreview" style="width: 100%;" >
+               </div>
+            </div>
          </div>
-       </div>
-      </div>
       </div>
       <script>
          // Set the date we're counting down to
@@ -422,7 +422,10 @@
          // once the window loads, we are ready for some fireworks!
          window.onload = loop;
          $(document).ready(function(){
-         $("#exampleModalCenter").modal('show');
+            $("#exampleModalCenter").modal('show');
+            $('.pop').on('click', function() {
+			   $('#imagemodal').modal('show');   
+		    });		
          });
          
          $('#exampleModalCenter').modal({backdrop: 'static', keyboard: false})  
