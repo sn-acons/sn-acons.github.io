@@ -42,10 +42,9 @@
     <script>
         function sendMessage() {
             // Send message up to parent website
-            window.top.postMessage({
-                action: 'openModal',
-                url: 'https://public.tableau.com/views/Dashboard1-ACCAN_17738327120840/Dashboard5?:showVizHome=no&:toolbar=no&:embed=yes'
-            }, '*');
+            window.parent.postMessage({ action: 'openModal', url: '...' }, '*');
+            window.parent.parent.postMessage({ action: 'openModal', url: '...' }, '*');
+            window.parent.parent.parent.postMessage({ action: 'openModal', url: '...' }, '*');
         }
     </script>
 
