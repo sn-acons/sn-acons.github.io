@@ -3,225 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expand Dashboard</title>
+    <title>Expand</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: #0f172a;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            cursor: pointer;
-            font-family: 'Segoe UI', sans-serif;
+            background: transparent;
         }
 
-        /* Ripple effect on click */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-        }
-
-        .click-hint {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            color: #94a3b8;
-            user-select: none;
-            animation: fadeIn 1s ease;
-        }
-
-        .popup-icon {
-            width: 80px;
-            height: 80px;
+        button {
             background: linear-gradient(135deg, #3b82f6, #6366f1);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            animation: pulse 2s infinite;
-        }
-
-        .popup-icon:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 60px rgba(99, 102, 241, 0.6);
-        }
-
-        .popup-icon svg {
-            width: 40px;
-            height: 40px;
-            fill: white;
-        }
-
-        .click-hint p {
-            font-size: 13px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.4); }
-            50% { box-shadow: 0 0 70px rgba(99, 102, 241, 0.7); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Overlay */
-        #overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            z-index: 999;
-            backdrop-filter: blur(4px);
-            animation: overlayIn 0.3s ease;
-        }
-
-        @keyframes overlayIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Modal */
-        #modal {
-            display: none;
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0.95);
-            width: 90%;
-            max-width: 1100px;
-            height: 85vh;
-            background: #1e293b;
-            border-radius: 16px;
-            overflow: hidden;
-            z-index: 1000;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.6);
-            animation: modalIn 0.3s ease forwards;
-        }
-
-        @keyframes modalIn {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.93); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .modal-header {
-            background: #0f172a;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #334155;
-        }
-
-        .modal-header span {
-            color: #94a3b8;
-            font-size: 13px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        #closeBtn {
-            background: #ef4444;
-            border: none;
             color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        #closeBtn:hover {
-            background: #dc2626;
-        }
-
-        .iframe-wrap {
-            width: 100%;
-            height: calc(100% - 50px);
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
             border: none;
+            padding: 12px 28px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .loading {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: #64748b;
-            font-size: 13px;
-            letter-spacing: 1px;
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 28px rgba(99,102,241,0.6);
         }
     </style>
 </head>
 <body>
 
-    <div class="click-hint">
-        <div class="popup-icon">
-            <!-- Expand icon -->
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 3h7v2H5v5H3V3zm11 0h7v7h-2V5h-5V3zM3 14h2v5h5v2H3v-7zm16 5h-5v2h7v-7h-2v5z"/>
-            </svg>
-        </div>
-        <p>Click anywhere to expand dashboard</p>
-    </div>
-
-    <div id="overlay" onclick="closeModal()"></div>
-
-    <div id="modal">
-        <div class="modal-header">
-            <span>Dashboard View</span>
-            <button id="closeBtn" onclick="closeModal()">&#x2715;</button>
-        </div>
-        <div class="iframe-wrap">
-            <iframe
-                id="tableauFrame"
-                src=""
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
+    <button onclick="sendMessage()">Expand Dashboard</button>
 
     <script>
-        const TABLEAU_URL = 'https://public.tableau.com/views/Dashboard1-ACCAN_17738327120840/Dashboard5?:showVizHome=no&:toolbar=no&:embed=yes';
-
-        document.body.addEventListener('click', function(e) {
-            if (e.target.closest('#modal') || e.target.closest('#overlay')) return;
-            openModal();
-        });
-
-        function openModal() {
-            document.getElementById('tableauFrame').src = TABLEAU_URL;
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('modal').style.display = 'block';
+        function sendMessage() {
+            // Send message up to parent website
+            window.top.postMessage({
+                action: 'openModal',
+                url: 'https://public.tableau.com/views/Dashboard1-ACCAN_17738327120840/Dashboard5?:showVizHome=no&:toolbar=no&:embed=yes'
+            }, '*');
         }
-
-        function closeModal() {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('modal').style.display = 'none';
-            document.getElementById('tableauFrame').src = '';
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
-        });
     </script>
 
 </body>
